@@ -8,18 +8,33 @@ using OpenTK.Graphics.OpenGL;
 
 namespace BadEngine
 {
-    public static class Shader
+    public class Shader
     {
-        public static int CreateShaderFromFile(ShaderType type, string path)
+        public int ShaderID;
+        public void CreateFromFile(ShaderType type, string path)
         {
-            int Shader = GL.CreateShader(type);
-            GL.ShaderSource(Shader, File.ReadAllText(path));
-            return Shader;
+            ShaderID = GL.CreateShader(type);
+            if (File.Exists(path))
+            {
+                GL.ShaderSource(ShaderID, File.ReadAllText(path));
+            }
+            else
+            {
+                throw new FileNotFoundException();
+            }
         }
-        public static string CompileShader(int Shader)
+        public void Compile()
         {
-            GL.CompileShader(Shader);
-            return GL.GetShaderInfoLog(Shader);
+            GL.CompileShader(ShaderID);
+        }
+        public string GetInfoLog()
+        {
+            return GL.GetShaderInfoLog(ShaderID);
+        }
+
+        public void Attach(int program)
+        {
+            GL.AttachShader(program, ShaderID);
         }
     }
 }
