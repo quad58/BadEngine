@@ -8,27 +8,14 @@ using BadEngine;
 
 namespace BadEngine
 {
-    public class DemoGame
+    public class DemoGame : MonoBehaviour
     {
-        public DemoGame()
-        {
-            InitializeScript();
-        }
-
         public float CubeSpeed = 1f;
         public float RotateSpeed = 1f;
         public float CubeSize = 0.05f;
         public GameObject Cube = new GameObject();
 
-        public void InitializeScript()
-        {
-            BadEngine.Program.Start = Start;
-            BadEngine.Program.GLStart = GLStart;
-            BadEngine.Program.Update = Update;
-            BadEngine.Program.Stop = Stop;
-        }
-
-        public void Start()
+        public override void Start()
         {
             Console.WriteLine("");
             Console.WriteLine("Esc - Stop game");
@@ -42,17 +29,15 @@ namespace BadEngine
             Console.WriteLine("Pink - Up (E)");
             Console.WriteLine("Ligth Blue - Down (Q)");
             Console.WriteLine("");
-
-            Program.RunGame();
         }
 
-        public void GLStart()
+        public override void GLStart()
         {
             Cube = Instatiate.Cube(CubeSize);
             GL.Viewport(0, 0, 700, 700);
         }
 
-        public void Update()
+        public override void Update()
         {
             Cube.Render();
 
@@ -87,7 +72,7 @@ namespace BadEngine
             Program.Game.MouseMove += Game_MouseMove;
         }
 
-        public void Stop()
+        public override void Stop()
         {
             Cube.Destroy();
         }

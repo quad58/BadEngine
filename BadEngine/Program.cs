@@ -30,7 +30,7 @@ namespace BadEngine
         {
             base.OnLoad(args);
 
-            //DemoGame.GLStart();
+            Program.GLStart.Invoke();
             GL.Enable(EnableCap.DepthTest);
             GL.Enable(EnableCap.CullFace);
             GL.CullFace(CullFaceMode.Back);
@@ -55,7 +55,7 @@ namespace BadEngine
                 FrameTime = 0;
             }
 
-            //DemoGame.Update();
+            Program.Update.Invoke();
 
             this.Context.SwapBuffers();
             base.OnUpdateFrame(args);
@@ -78,8 +78,10 @@ namespace BadEngine
         public static Window Game = new Window(WindowTitle, WindowWidth, WindowHeight, WindowFlag);
         static void Main(string[] args)
         {
+            InitializeScripts();
             Console.WriteLine("Engine Started");
-            //DemoGame.Start();
+            Start.Invoke();
+            Program.RunGame();
         }
 
         static void InitializeScripts()
@@ -95,7 +97,7 @@ namespace BadEngine
         public static void StopGame()
         {
             Game.Exit();
-            //DemoGame.Stop();
+            Stop.Invoke();
             Console.WriteLine("Engine Stopped");
         }
 
