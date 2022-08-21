@@ -4,42 +4,39 @@ using OpenTK;
 using OpenTK.Input;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
-
-namespace BadEngine
+using BadEngine;
+public class MonoBehaviour
 {
-    public class MonoBehaviour
+    public MonoBehaviour()
     {
-        public MonoBehaviour()
-        {
-            InitializeScript();
-        }
+        InitializeScript();
+    }
 
-        public void InitializeScript()
-        {
-            BadEngine.Program.Start += Start;
-            BadEngine.Program.GLStart += GLStart;
-            BadEngine.Program.Update += Update;
-            BadEngine.Program.Stop += Stop;
-        }
+    public void InitializeScript()
+    {
+        BadEngine.Program.Start += Start;
+        BadEngine.Program.GLStart += GLStart;
+        BadEngine.Program.Update += Update;
+        BadEngine.Program.Stop += Stop;
+    }
 
-        public virtual void Start()
-        {
+    public virtual void Start()
+    {
             
-        }
+    }
 
-        public virtual void GLStart()
-        {
+    public virtual void GLStart()
+    {
             
-        }
+    }
 
-        public virtual void Update()
-        {
+    public virtual void Update()
+    {
             
-        }
+    }
 
-        public virtual void Stop()
-        {
+    public virtual void Stop()
+    {
             
-        }
     }
 }

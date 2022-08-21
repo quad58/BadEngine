@@ -6,80 +6,77 @@ using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using BadEngine;
 
-namespace BadEngine
+public class DemoGame : MonoBehaviour
 {
-    public class DemoGame : MonoBehaviour
+    public float CubeSpeed = 1f;
+    public float RotateSpeed = 1f;
+    public float CubeSize = 0.05f;
+    public GameObject Cube = new GameObject();
+
+    public override void Start()
     {
-        public float CubeSpeed = 1f;
-        public float RotateSpeed = 1f;
-        public float CubeSize = 0.05f;
-        public GameObject Cube = new GameObject();
+        Console.WriteLine("");
+        Console.WriteLine("Esc - Stop game");
+        Console.WriteLine("");
+        Console.WriteLine("Mouse - Rotate");
+        Console.WriteLine("");
+        Console.WriteLine("Red - Forward (W)");
+        Console.WriteLine("Green - Backward (S)");
+        Console.WriteLine("Yellow - Left (A)");
+        Console.WriteLine("Blue - Right (D)");
+        Console.WriteLine("Pink - Up (E)");
+        Console.WriteLine("Ligth Blue - Down (Q)");
+        Console.WriteLine("");
+    }
 
-        public override void Start()
+    public override void GLStart()
+    {
+        Cube = Instatiate.Cube(CubeSize);
+        GL.Viewport(0, 0, 700, 700);
+    }
+
+    public override void Update()
+    {
+        Cube.Render();
+
+        if (Keyboard.GetState().IsKeyDown(Key.Escape))
         {
-            Console.WriteLine("");
-            Console.WriteLine("Esc - Stop game");
-            Console.WriteLine("");
-            Console.WriteLine("Mouse - Rotate");
-            Console.WriteLine("");
-            Console.WriteLine("Red - Forward (W)");
-            Console.WriteLine("Green - Backward (S)");
-            Console.WriteLine("Yellow - Left (A)");
-            Console.WriteLine("Blue - Right (D)");
-            Console.WriteLine("Pink - Up (E)");
-            Console.WriteLine("Ligth Blue - Down (Q)");
-            Console.WriteLine("");
+            Program.StopGame();
         }
-
-        public override void GLStart()
+        if (Keyboard.GetState().IsKeyDown(Key.W))
         {
-            Cube = Instatiate.Cube(CubeSize);
-            GL.Viewport(0, 0, 700, 700);
+            GL.Translate(new Vector3(0, 0, CubeSpeed * Time.deltaTime));
         }
-
-        public override void Update()
+        if (Keyboard.GetState().IsKeyDown(Key.S))
         {
-            Cube.Render();
-
-            if (Keyboard.GetState().IsKeyDown(Key.Escape))
-            {
-                Program.StopGame();
-            }
-            if (Keyboard.GetState().IsKeyDown(Key.W))
-            {
-                GL.Translate(new Vector3(0, 0, CubeSpeed * Time.deltaTime));
-            }
-            if (Keyboard.GetState().IsKeyDown(Key.S))
-            {
-                GL.Translate(new Vector3(0, 0, -CubeSpeed * Time.deltaTime));
-            }
-            if (Keyboard.GetState().IsKeyDown(Key.A))
-            {
-                GL.Translate(new Vector3(-CubeSpeed * Time.deltaTime, 0, 0));
-            }
-            if (Keyboard.GetState().IsKeyDown(Key.D))
-            {
-                GL.Translate(new Vector3(CubeSpeed * Time.deltaTime, 0, 0));
-            }
-            if (Keyboard.GetState().IsKeyDown(Key.Q))
-            {
-                GL.Translate(new Vector3(0, -CubeSpeed * Time.deltaTime, 0));
-            }
-            if (Keyboard.GetState().IsKeyDown(Key.E))
-            {
-                GL.Translate(new Vector3(0, CubeSpeed * Time.deltaTime, 0));
-            }
-            Program.Game.MouseMove += Game_MouseMove;
+            GL.Translate(new Vector3(0, 0, -CubeSpeed * Time.deltaTime));
         }
-
-        public override void Stop()
+        if (Keyboard.GetState().IsKeyDown(Key.A))
         {
-            Cube.Destroy();
+            GL.Translate(new Vector3(-CubeSpeed * Time.deltaTime, 0, 0));
         }
-
-        private void Game_MouseMove(object sender, MouseMoveEventArgs args)
+        if (Keyboard.GetState().IsKeyDown(Key.D))
         {
-            GL.Rotate(RotateSpeed * Time.deltaTime, new Vector3(args.YDelta, args.XDelta, 0));
+            GL.Translate(new Vector3(CubeSpeed * Time.deltaTime, 0, 0));
         }
+        if (Keyboard.GetState().IsKeyDown(Key.Q))
+        {
+            GL.Translate(new Vector3(0, -CubeSpeed * Time.deltaTime, 0));
+        }
+        if (Keyboard.GetState().IsKeyDown(Key.E))
+        {
+            GL.Translate(new Vector3(0, CubeSpeed * Time.deltaTime, 0));
+        }
+        Program.Game.MouseMove += Game_MouseMove;
+    }
+
+    public override void Stop()
+    {
+        Cube.Destroy();
+    }
+
+    private void Game_MouseMove(object sender, MouseMoveEventArgs args)
+    {
+        GL.Rotate(RotateSpeed * Time.deltaTime, new Vector3(args.YDelta, args.XDelta, 0));
     }
 }
