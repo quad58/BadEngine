@@ -6,16 +6,29 @@ using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using BadEngine;
 
-namespace DemoGameScript
+namespace BadEngine
 {
-    public static class DemoGame
+    public class DemoGame
     {
-        public static float CubeSpeed = 1f;
-        public static float RotateSpeed = 1f;
-        public static float CubeSize = 0.05f;
-        public static GameObject Cube = new GameObject();
+        public DemoGame()
+        {
+            InitializeScript();
+        }
 
-        public static void Start()
+        public float CubeSpeed = 1f;
+        public float RotateSpeed = 1f;
+        public float CubeSize = 0.05f;
+        public GameObject Cube = new GameObject();
+
+        public void InitializeScript()
+        {
+            BadEngine.Program.Start = Start;
+            BadEngine.Program.GLStart = GLStart;
+            BadEngine.Program.Update = Update;
+            BadEngine.Program.Stop = Stop;
+        }
+
+        public void Start()
         {
             Console.WriteLine("");
             Console.WriteLine("Esc - Stop game");
@@ -33,13 +46,13 @@ namespace DemoGameScript
             Program.RunGame();
         }
 
-        public static void GLStart()
+        public void GLStart()
         {
             Cube = Instatiate.Cube(CubeSize);
             GL.Viewport(0, 0, 700, 700);
         }
 
-        public static void Update()
+        public void Update()
         {
             Cube.Render();
 
@@ -74,12 +87,12 @@ namespace DemoGameScript
             Program.Game.MouseMove += Game_MouseMove;
         }
 
-        public static void Stop()
+        public void Stop()
         {
             Cube.Destroy();
         }
 
-        private static void Game_MouseMove(object sender, MouseMoveEventArgs args)
+        private void Game_MouseMove(object sender, MouseMoveEventArgs args)
         {
             GL.Rotate(RotateSpeed * Time.deltaTime, new Vector3(args.YDelta, args.XDelta, 0));
         }

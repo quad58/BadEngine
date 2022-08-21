@@ -4,7 +4,6 @@ using OpenTK;
 using OpenTK.Input;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
-using DemoGameScript;
 
 namespace BadEngine
 {
@@ -31,7 +30,7 @@ namespace BadEngine
         {
             base.OnLoad(args);
 
-            DemoGame.GLStart();
+            //DemoGame.GLStart();
             GL.Enable(EnableCap.DepthTest);
             GL.Enable(EnableCap.CullFace);
             GL.CullFace(CullFaceMode.Back);
@@ -56,7 +55,7 @@ namespace BadEngine
                 FrameTime = 0;
             }
 
-            DemoGame.Update();
+            //DemoGame.Update();
 
             this.Context.SwapBuffers();
             base.OnUpdateFrame(args);
@@ -66,6 +65,11 @@ namespace BadEngine
     }
     class Program
     {
+        public static Action Start;
+        public static Action GLStart;
+        public static Action Update;
+        public static Action Stop;
+
         public static string WindowTitle = "BadEngine";
         public static int WindowWidth = 700;
         public static int WindowHeight = 700;
@@ -75,7 +79,12 @@ namespace BadEngine
         static void Main(string[] args)
         {
             Console.WriteLine("Engine Started");
-            DemoGame.Start();
+            //DemoGame.Start();
+        }
+
+        static void InitializeScripts()
+        {
+            new DemoGame();
         }
 
         public static void RunGame()
@@ -86,7 +95,7 @@ namespace BadEngine
         public static void StopGame()
         {
             Game.Exit();
-            DemoGame.Stop();
+            //DemoGame.Stop();
             Console.WriteLine("Engine Stopped");
         }
 
