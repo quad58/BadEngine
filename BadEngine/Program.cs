@@ -107,62 +107,6 @@ namespace BadEngine
         }
     }
 
-    public static class Instatiate
-    {
-        public static GameObject Cube(float Scale)
-        {
-            GameObject Object = new GameObject();
-            int ListIndex = GL.GenLists(1);
-            Object.ListIndex = ListIndex;
-
-            GL.NewList(ListIndex, ListMode.Compile);
-            GL.Begin(PrimitiveType.Quads);
-
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.Repeat);
-
-            GL.Color3(1f, 0f, 0f);
-            GL.Vertex3(new Vector3d(-Scale, Scale, Scale));
-            GL.Vertex3(new Vector3d(Scale, Scale, Scale));
-            GL.Vertex3(new Vector3d(Scale, -Scale, Scale));
-            GL.Vertex3(new Vector3d(-Scale, -Scale, Scale));
-
-            GL.Color3(0f, 1f, 0f);
-            GL.Vertex3(new Vector3d(-Scale, -Scale, -Scale));
-            GL.Vertex3(new Vector3d(Scale, -Scale, -Scale));
-            GL.Vertex3(new Vector3d(Scale, Scale, -Scale));
-            GL.Vertex3(new Vector3d(-Scale, Scale, -Scale));
-
-            GL.Color3(0f, 0f, 1f);
-            GL.Vertex3(new Vector3d(Scale, -Scale, -Scale));
-            GL.Vertex3(new Vector3d(Scale, -Scale, Scale));
-            GL.Vertex3(new Vector3d(Scale, Scale, Scale));
-            GL.Vertex3(new Vector3d(Scale, Scale, -Scale));
-
-            GL.Color3(1f, 1f, 0f);
-            GL.Vertex3(new Vector3d(-Scale, Scale, -Scale));
-            GL.Vertex3(new Vector3d(-Scale, Scale, Scale));
-            GL.Vertex3(new Vector3d(-Scale, -Scale, Scale));
-            GL.Vertex3(new Vector3d(-Scale, -Scale, -Scale));
-
-            GL.Color3(1f, 0f, 1f);
-            GL.Vertex3(new Vector3d(Scale, Scale, -Scale));
-            GL.Vertex3(new Vector3d(Scale, Scale, Scale));
-            GL.Vertex3(new Vector3d(-Scale, Scale, Scale));
-            GL.Vertex3(new Vector3d(-Scale, Scale, -Scale));
-
-            GL.Color3(0f, 1f, 1f);
-            GL.Vertex3(new Vector3d(-Scale, -Scale, -Scale));
-            GL.Vertex3(new Vector3d(-Scale, -Scale, Scale));
-            GL.Vertex3(new Vector3d(Scale, -Scale, Scale));
-            GL.Vertex3(new Vector3d(Scale, -Scale, -Scale));
-
-            GL.End();
-            GL.EndList();
-
-            return Object;
-        }
-    }
-
     public static class Time
     {
         public static float deltaTime;
@@ -179,6 +123,61 @@ namespace BadEngine
         {
             GL.DeleteLists(ListIndex, 1);
             ListIndex = 0;
+        }
+        public static class Instatiate
+        {
+            public static GameObject Cube(float Scale)
+            {
+                GameObject Object = new GameObject();
+                int ListIndex = GL.GenLists(1);
+                Object.ListIndex = ListIndex;
+
+                GL.NewList(ListIndex, ListMode.Compile);
+                GL.Begin(PrimitiveType.Quads);
+
+                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.Repeat);
+
+                GL.Color3(1f, 0f, 0f);
+                GL.Vertex3(new Vector3d(-Scale, Scale, Scale));
+                GL.Vertex3(new Vector3d(Scale, Scale, Scale));
+                GL.Vertex3(new Vector3d(Scale, -Scale, Scale));
+                GL.Vertex3(new Vector3d(-Scale, -Scale, Scale));
+
+                GL.Color3(0f, 1f, 0f);
+                GL.Vertex3(new Vector3d(-Scale, -Scale, -Scale));
+                GL.Vertex3(new Vector3d(Scale, -Scale, -Scale));
+                GL.Vertex3(new Vector3d(Scale, Scale, -Scale));
+                GL.Vertex3(new Vector3d(-Scale, Scale, -Scale));
+
+                GL.Color3(0f, 0f, 1f);
+                GL.Vertex3(new Vector3d(Scale, -Scale, -Scale));
+                GL.Vertex3(new Vector3d(Scale, -Scale, Scale));
+                GL.Vertex3(new Vector3d(Scale, Scale, Scale));
+                GL.Vertex3(new Vector3d(Scale, Scale, -Scale));
+
+                GL.Color3(1f, 1f, 0f);
+                GL.Vertex3(new Vector3d(-Scale, Scale, -Scale));
+                GL.Vertex3(new Vector3d(-Scale, Scale, Scale));
+                GL.Vertex3(new Vector3d(-Scale, -Scale, Scale));
+                GL.Vertex3(new Vector3d(-Scale, -Scale, -Scale));
+
+                GL.Color3(1f, 0f, 1f);
+                GL.Vertex3(new Vector3d(Scale, Scale, -Scale));
+                GL.Vertex3(new Vector3d(Scale, Scale, Scale));
+                GL.Vertex3(new Vector3d(-Scale, Scale, Scale));
+                GL.Vertex3(new Vector3d(-Scale, Scale, -Scale));
+
+                GL.Color3(0f, 1f, 1f);
+                GL.Vertex3(new Vector3d(-Scale, -Scale, -Scale));
+                GL.Vertex3(new Vector3d(-Scale, -Scale, Scale));
+                GL.Vertex3(new Vector3d(Scale, -Scale, Scale));
+                GL.Vertex3(new Vector3d(Scale, -Scale, -Scale));
+
+                GL.End();
+                GL.EndList();
+
+                return Object;
+            }
         }
     }
 }
