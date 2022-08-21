@@ -29,11 +29,14 @@ namespace BadEngine
         {}
         protected override void OnLoad(EventArgs args)
         {
+            base.OnLoad(args);
+
             DemoGame.GLStart();
             GL.Enable(EnableCap.DepthTest);
-            Matrix4 projection = Matrix4.CreatePerspectiveFieldOfView(MathHelper.DegreesToRadians(90.0f), Width / Height, 0.1f, 100.0f);
+            GL.Enable(EnableCap.CullFace);
+            GL.CullFace(CullFaceMode.Back);
+            //Matrix4 projection = Matrix4.CreatePerspectiveFieldOfView(MathHelper.DegreesToRadians(90.0f), Width / Height, 0.1f, 100.0f);
             //shader.SetMatrix4("projection", projection);
-            base.OnLoad(args);
         }
 
         protected override void OnRenderFrame(FrameEventArgs args)
@@ -107,10 +110,10 @@ namespace BadEngine
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.Repeat);
 
             GL.Color3(1f, 0f, 0f);
-            GL.Vertex3(new Vector3d(-Scale, -Scale, Scale));
-            GL.Vertex3(new Vector3d(Scale, -Scale, Scale));
-            GL.Vertex3(new Vector3d(Scale, Scale, Scale));
             GL.Vertex3(new Vector3d(-Scale, Scale, Scale));
+            GL.Vertex3(new Vector3d(Scale, Scale, Scale));
+            GL.Vertex3(new Vector3d(Scale, -Scale, Scale));
+            GL.Vertex3(new Vector3d(-Scale, -Scale, Scale));
 
             GL.Color3(0f, 1f, 0f);
             GL.Vertex3(new Vector3d(-Scale, -Scale, -Scale));
@@ -119,10 +122,10 @@ namespace BadEngine
             GL.Vertex3(new Vector3d(-Scale, Scale, -Scale));
 
             GL.Color3(0f, 0f, 1f);
-            GL.Vertex3(new Vector3d(Scale, Scale, -Scale));
-            GL.Vertex3(new Vector3d(Scale, Scale, Scale));
-            GL.Vertex3(new Vector3d(Scale, -Scale, Scale));
             GL.Vertex3(new Vector3d(Scale, -Scale, -Scale));
+            GL.Vertex3(new Vector3d(Scale, -Scale, Scale));
+            GL.Vertex3(new Vector3d(Scale, Scale, Scale));
+            GL.Vertex3(new Vector3d(Scale, Scale, -Scale));
 
             GL.Color3(1f, 1f, 0f);
             GL.Vertex3(new Vector3d(-Scale, Scale, -Scale));
@@ -131,10 +134,10 @@ namespace BadEngine
             GL.Vertex3(new Vector3d(-Scale, -Scale, -Scale));
 
             GL.Color3(1f, 0f, 1f);
-            GL.Vertex3(new Vector3d(-Scale, Scale, -Scale));
-            GL.Vertex3(new Vector3d(-Scale, Scale, Scale));
-            GL.Vertex3(new Vector3d(Scale, Scale, Scale));
             GL.Vertex3(new Vector3d(Scale, Scale, -Scale));
+            GL.Vertex3(new Vector3d(Scale, Scale, Scale));
+            GL.Vertex3(new Vector3d(-Scale, Scale, Scale));
+            GL.Vertex3(new Vector3d(-Scale, Scale, -Scale));
 
             GL.Color3(0f, 1f, 1f);
             GL.Vertex3(new Vector3d(-Scale, -Scale, -Scale));
