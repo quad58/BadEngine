@@ -32,9 +32,19 @@ namespace BadEngine
             return GL.GetShaderInfoLog(ShaderID);
         }
 
-        public void Attach(int program)
+        public void Destroy()
         {
-            GL.AttachShader(program, ShaderID);
+            GL.DeleteShader(ShaderID);
+        }
+
+        public void Attach(ShaderProgram program)
+        {
+            GL.AttachShader(program.ProgramID, ShaderID);
+        }
+
+        public void Detach(ShaderProgram program)
+        {
+            GL.DetachShader(program.ProgramID, ShaderID);
         }
     }
 }
