@@ -12,8 +12,8 @@ public class DemoGame : MonoBehaviour
     float CubeSpeed = 1f;
     float RotateSpeed = 1f;
     float CubeSize = 0.05f;
-    GameObject Cube = new GameObject();
-    ShaderProgram DefaultShaderProgram = new ShaderProgram();
+
+    GameObject Cube;
 
     public override void Start()
     {
@@ -33,16 +33,13 @@ public class DemoGame : MonoBehaviour
 
     public override void GLStart()
     {
-        Cube = GameObject.Instatiate.Cube(CubeSize);
         GL.Viewport(0, 0, 700, 700);
 
-        DefaultShaderProgram.UseDefaultProgram();
+        Cube = GameObject.Instantiate(PrimitiveGameObjectType.Cube, CubeSize);
     }
 
     public override void Update()
     {
-        DefaultShaderProgram.Eneble();
-
         Cube.Render();
 
         if (Keyboard.GetState().IsKeyDown(Key.Escape))
@@ -74,8 +71,6 @@ public class DemoGame : MonoBehaviour
             GL.Translate(new Vector3(0, CubeSpeed * Time.deltaTime, 0));
         }
         Game.MouseMove += Game_MouseMove;
-
-        DefaultShaderProgram.Disable();
     }
 
     public override void Stop()

@@ -113,17 +113,74 @@ namespace BadEngine
     public class GameObject
     {
         public int ListIndex;
+        public ShaderProgram _ShaderProgram = new ShaderProgram();
         public void Render()
         {
+            //_ShaderProgram.Eneble();
             GL.CallList(ListIndex);
+            //_ShaderProgram.Disable();
         }
         public void Destroy()
         {
             GL.DeleteLists(ListIndex, 1);
             ListIndex = 0;
         }
-        public static class Instatiate
+        public static class InstantiateGameObject
         {
+            public static GameObject Cube(ShaderProgram shaderProgram, float Scale)
+            {
+                GameObject Object = new GameObject();
+                int ListIndex = GL.GenLists(1);
+                Object.ListIndex = ListIndex;
+                Object._ShaderProgram = shaderProgram;
+
+                GL.NewList(ListIndex, ListMode.Compile);
+                GL.Begin(PrimitiveType.Quads);
+
+                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.Repeat);
+
+                GL.Color3(1f, 0f, 0f);
+                GL.Vertex3(new Vector3d(-Scale, Scale, Scale));
+                GL.Vertex3(new Vector3d(Scale, Scale, Scale));
+                GL.Vertex3(new Vector3d(Scale, -Scale, Scale));
+                GL.Vertex3(new Vector3d(-Scale, -Scale, Scale));
+
+                GL.Color3(0f, 1f, 0f);
+                GL.Vertex3(new Vector3d(-Scale, -Scale, -Scale));
+                GL.Vertex3(new Vector3d(Scale, -Scale, -Scale));
+                GL.Vertex3(new Vector3d(Scale, Scale, -Scale));
+                GL.Vertex3(new Vector3d(-Scale, Scale, -Scale));
+
+                GL.Color3(0f, 0f, 1f);
+                GL.Vertex3(new Vector3d(Scale, -Scale, -Scale));
+                GL.Vertex3(new Vector3d(Scale, -Scale, Scale));
+                GL.Vertex3(new Vector3d(Scale, Scale, Scale));
+                GL.Vertex3(new Vector3d(Scale, Scale, -Scale));
+
+                GL.Color3(1f, 1f, 0f);
+                GL.Vertex3(new Vector3d(-Scale, Scale, -Scale));
+                GL.Vertex3(new Vector3d(-Scale, Scale, Scale));
+                GL.Vertex3(new Vector3d(-Scale, -Scale, Scale));
+                GL.Vertex3(new Vector3d(-Scale, -Scale, -Scale));
+
+                GL.Color3(1f, 0f, 1f);
+                GL.Vertex3(new Vector3d(Scale, Scale, -Scale));
+                GL.Vertex3(new Vector3d(Scale, Scale, Scale));
+                GL.Vertex3(new Vector3d(-Scale, Scale, Scale));
+                GL.Vertex3(new Vector3d(-Scale, Scale, -Scale));
+
+                GL.Color3(0f, 1f, 1f);
+                GL.Vertex3(new Vector3d(-Scale, -Scale, -Scale));
+                GL.Vertex3(new Vector3d(-Scale, -Scale, Scale));
+                GL.Vertex3(new Vector3d(Scale, -Scale, Scale));
+                GL.Vertex3(new Vector3d(Scale, -Scale, -Scale));
+
+                GL.End();
+                GL.EndList();
+
+                return Object;
+            }
+
             public static GameObject Cube(float Scale)
             {
                 GameObject Object = new GameObject();
@@ -177,5 +234,28 @@ namespace BadEngine
                 return Object;
             }
         }
+
+        public static GameObject Instantiate(PrimitiveGameObjectType Type, ShaderProgram shaderProgram, float Scale)
+        {
+            if (Type == PrimitiveGameObjectType.Cube)
+            {
+                return InstantiateGameObject.Cube(shaderProgram, Scale);
+            }
+            return null;
+        }
+
+        public static GameObject Instantiate(PrimitiveGameObjectType Type, float Scale)
+        {
+            if (Type == PrimitiveGameObjectType.Cube)
+            {
+                return InstantiateGameObject.Cube(Scale);
+            }
+            return null;
+        }
+    }
+
+    public enum PrimitiveGameObjectType
+    {
+        Cube
     }
 }
