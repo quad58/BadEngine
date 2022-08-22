@@ -70,25 +70,18 @@ namespace BadEngine
             return GL.GetProgramInfoLog(ProgramID);
         }
 
-        public static ShaderProgram CreateDefaultProgram()
+        public void UseDefaultProgram()
         {
-            ShaderProgram _ShaderProgram = new ShaderProgram();
-            _ShaderProgram.CreateProgram();
-
+            CreateProgram();
             Shader DefaultVertexShader = new Shader();
             DefaultVertexShader.CreateFromFile(ShaderType.VertexShader, DefaultVertexShaderPath);
             DefaultVertexShader.Compile();
+            DefaultVertexShader.Attach(this);
+            Link();
+            DefaultVertexShader.Detach(this);
+            DefaultVertexShader.Destroy();
+            Eneble();
 
-            _ShaderProgram.AttachShader(DefaultVertexShader);
-            _ShaderProgram.Link();
-
-            _ShaderProgram.SetAsDefaultProgram();
-
-            return _ShaderProgram;
-        }
-
-        public void SetAsDefaultProgram()
-        {
             Matrix4 model = Matrix4.CreateRotationX(MathHelper.DegreesToRadians(-55.0f));
             Matrix4 view = Matrix4.CreateTranslation(0.0f, 0.0f, -3.0f);
             Matrix4 projection = Matrix4.CreatePerspectiveFieldOfView(MathHelper.DegreesToRadians(45.0f), Program.WindowWidth / Program.WindowHeight, 0.1f, 100.0f);
@@ -96,7 +89,6 @@ namespace BadEngine
             SetMatrix4("model", model);
             SetMatrix4("view", view);
             SetMatrix4("projection", projection);
-            Eneble();
         }
 
         public void SetMatrix4(string name, Matrix4 data)
