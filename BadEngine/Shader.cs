@@ -11,12 +11,16 @@ namespace BadEngine
     public class Shader
     {
         public int ShaderID;
+
+        public bool exists;
+        public bool attached;
         public void CreateFromFile(ShaderType type, string path)
         {
             ShaderID = GL.CreateShader(type);
             if (File.Exists(path))
             {
                 GL.ShaderSource(ShaderID, File.ReadAllText(path));
+                exists = true;
             }
             else
             {
@@ -35,16 +39,19 @@ namespace BadEngine
         public void Destroy()
         {
             GL.DeleteShader(ShaderID);
+            exists = false;
         }
 
         public void Attach(ShaderProgram program)
         {
             GL.AttachShader(program.ProgramID, ShaderID);
+            attached = true;
         }
 
         public void Detach(ShaderProgram program)
         {
             GL.DetachShader(program.ProgramID, ShaderID);
+            attached = false;
         }
     }
 }

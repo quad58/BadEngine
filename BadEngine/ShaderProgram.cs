@@ -41,13 +41,17 @@ namespace BadEngine
             return GL.GetProgramInfoLog(ProgramID);
         }
 
-        public void CreateDefaultProgram()
+        public void UseDefaultProgram()
         {
             CreateProgram();
             Shader DefaultVertexShader = new Shader();
             DefaultVertexShader.CreateFromFile(ShaderType.VertexShader, DefaultVertexShaderPath);
             DefaultVertexShader.Compile();
             DefaultVertexShader.Attach(this);
+            Link();
+            DefaultVertexShader.Detach(this);
+            DefaultVertexShader.Destroy();
+            Eneble();
         }
 
         public void Eneble()

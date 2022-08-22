@@ -8,10 +8,11 @@ using BadEngine;
 
 public class DemoGame : MonoBehaviour
 {
-    public float CubeSpeed = 1f;
-    public float RotateSpeed = 1f;
-    public float CubeSize = 0.05f;
-    public GameObject Cube = new GameObject();
+    float CubeSpeed = 1f;
+    float RotateSpeed = 1f;
+    float CubeSize = 0.05f;
+    GameObject Cube = new GameObject();
+    ShaderProgram DefaultShaderProgram = new ShaderProgram();
 
     public override void Start()
     {
@@ -33,6 +34,8 @@ public class DemoGame : MonoBehaviour
     {
         Cube = GameObject.Instatiate.Cube(CubeSize);
         GL.Viewport(0, 0, 700, 700);
+
+        DefaultShaderProgram.UseDefaultProgram();
     }
 
     public override void Update()
