@@ -41,6 +41,8 @@ public class DemoGame : MonoBehaviour
 
     public override void Update()
     {
+        DefaultShaderProgram.Eneble();
+
         Cube.Render();
 
         if (Keyboard.GetState().IsKeyDown(Key.Escape))
@@ -72,6 +74,8 @@ public class DemoGame : MonoBehaviour
             GL.Translate(new Vector3(0, CubeSpeed * Time.deltaTime, 0));
         }
         Game.MouseMove += Game_MouseMove;
+
+        DefaultShaderProgram.Disable();
     }
 
     public override void Stop()
