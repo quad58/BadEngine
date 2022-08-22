@@ -11,7 +11,7 @@ namespace BadEngine
     public class ShaderProgram
     {
         public int ProgramID;
-        public static string DefaultShaderPath = @"data/shaders/glsl/Default.glsl";
+        public static string DefaultVertexShaderPath = @"data/shaders/glsl/Default.glsl";
         public void CreateProgram()
         {
             ProgramID = GL.CreateProgram();
@@ -35,10 +35,10 @@ namespace BadEngine
         public void CreateDefaultProgram()
         {
             CreateProgram();
-            Shader DefaultShader = new Shader();
-            DefaultShader.CreateFromFile(ShaderType.VertexShader, DefaultShaderPath);
-            DefaultShader.Compile();
-            DefaultShader.Attach(ProgramID);
+            Shader DefaultVertexShader = new Shader();
+            DefaultVertexShader.CreateFromFile(ShaderType.VertexShader, DefaultVertexShaderPath);
+            DefaultVertexShader.Compile();
+            DefaultVertexShader.Attach(ProgramID);
             Link();
         }
     }
