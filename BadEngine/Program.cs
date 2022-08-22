@@ -34,8 +34,6 @@ namespace BadEngine
             GL.Enable(EnableCap.DepthTest);
             GL.Enable(EnableCap.CullFace);
             GL.CullFace(CullFaceMode.Back);
-            //Matrix4 projection = Matrix4.CreatePerspectiveFieldOfView(MathHelper.DegreesToRadians(90.0f), Width / Height, 0.1f, 100.0f);
-            //shader.SetMatrix4("projection", projection);
         }
 
         protected override void OnRenderFrame(FrameEventArgs args)

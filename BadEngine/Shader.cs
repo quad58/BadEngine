@@ -12,11 +12,13 @@ namespace BadEngine
     {
         public int ShaderID;
 
+        public bool compiled;
         public bool exists;
         public bool attached;
         public void CreateFromFile(ShaderType type, string path)
         {
             ShaderID = GL.CreateShader(type);
+            compiled = false;
             if (File.Exists(path))
             {
                 GL.ShaderSource(ShaderID, File.ReadAllText(path));
@@ -24,12 +26,19 @@ namespace BadEngine
             }
             else
             {
+                exists = false;
                 throw new FileNotFoundException();
             }
         }
         public void Compile()
         {
             GL.CompileShader(ShaderID);
+            GL.GetShader(ShaderID, ShaderParameter.CompileStatus, out var code);
+            if (code != (int) All.True)
+            {
+                throw new Exception($"Shader {ShaderID}: Shader compile error. " + GetInfoLog());
+                compiled = true;
+            }
         }
         public string GetInfoLog()
         {

@@ -5,6 +5,7 @@ using OpenTK.Input;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using BadEngine;
+using static BadEngine.Program;
 
 public class DemoGame : MonoBehaviour
 {
@@ -44,7 +45,7 @@ public class DemoGame : MonoBehaviour
 
         if (Keyboard.GetState().IsKeyDown(Key.Escape))
         {
-            Program.StopGame();
+            StopGame();
         }
         if (Keyboard.GetState().IsKeyDown(Key.W))
         {
@@ -70,7 +71,7 @@ public class DemoGame : MonoBehaviour
         {
             GL.Translate(new Vector3(0, CubeSpeed * Time.deltaTime, 0));
         }
-        Program.Game.MouseMove += Game_MouseMove;
+        Game.MouseMove += Game_MouseMove;
     }
 
     public override void Stop()
