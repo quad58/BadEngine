@@ -10,26 +10,27 @@ namespace BadEngine
 {
     public class ShaderProgram
     {
-        public int ProgramID;
+        public int ID;
+        public bool enebled;
         public static string DefaultVertexShaderPath = @"data/shaders/glsl/Default.glsl";
         public void CreateProgram()
         {
-            ProgramID = GL.CreateProgram();
+            ID = GL.CreateProgram();
         }
 
         public void AttachShader(Shader shader)
         {
-            shader.Attach(ProgramID);
+            shader.Attach(ID);
         }
 
         public void Link()
         {
-            GL.LinkProgram(ProgramID);
+            GL.LinkProgram(ID);
         }
 
         public string GetInfoLog()
         {
-            return GL.GetProgramInfoLog(ProgramID);
+            return GL.GetProgramInfoLog(ID);
         }
 
         public void CreateDefaultProgram()
@@ -38,8 +39,25 @@ namespace BadEngine
             Shader DefaultVertexShader = new Shader();
             DefaultVertexShader.CreateFromFile(ShaderType.VertexShader, DefaultVertexShaderPath);
             DefaultVertexShader.Compile();
-            DefaultVertexShader.Attach(ProgramID);
+            DefaultVertexShader.Attach(ID);
             Link();
+        }
+
+        public void Eneble()
+        {
+            GL.UseProgram(ID);
+            enebled = true;
+        }
+
+        public void Disable()
+        {
+            GL.UseProgram(0);
+            enebled = false;
+        }
+
+        public static void DisableAll()
+        {
+            GL.UseProgram(0);
         }
     }
 }
