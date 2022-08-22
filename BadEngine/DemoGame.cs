@@ -12,7 +12,8 @@ public class DemoGame : MonoBehaviour
     float CubeSpeed = 1f;
     float RotateSpeed = 1f;
     float CubeSize = 0.05f;
-    GameObject Cube = new GameObject();
+
+    GameObject Cube;
     ShaderProgram DefaultShaderProgram = new ShaderProgram();
 
     public override void Start()
