@@ -33,10 +33,10 @@ public class DemoGame : MonoBehaviour
 
     public override void GLStart()
     {
-        Cube = GameObject.Instatiate.Cube(CubeSize);
+        Cube = GameObject.Instantiate(PrimitiveGameObject.Cube, CubeSize);
         GL.Viewport(0, 0, 700, 700);
 
-        DefaultShaderProgram.UseDefaultProgram();
+        //DefaultShaderProgram.UseDefaultProgram();
     }
 
     public override void Update()

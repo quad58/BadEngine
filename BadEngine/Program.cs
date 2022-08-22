@@ -122,7 +122,7 @@ namespace BadEngine
             GL.DeleteLists(ListIndex, 1);
             ListIndex = 0;
         }
-        public static class Instatiate
+        public static class InstantiateGameObject
         {
             public static GameObject Cube(float Scale)
             {
@@ -177,5 +177,28 @@ namespace BadEngine
                 return Object;
             }
         }
+
+        public static GameObject Instantiate(PrimitiveGameObject Type, ShaderProgram _ShaderProgram, float Scale)
+        {
+            if (Type == PrimitiveGameObject.Cube)
+            {
+                return InstantiateGameObject.Cube(Scale);
+            }
+            return null;
+        }
+
+        public static GameObject Instantiate(PrimitiveGameObject Type, float Scale)
+        {
+            if (Type == PrimitiveGameObject.Cube)
+            {
+                return InstantiateGameObject.Cube(Scale);
+            }
+            return null;
+        }
+    }
+
+    public enum PrimitiveGameObject
+    {
+        Cube
     }
 }
