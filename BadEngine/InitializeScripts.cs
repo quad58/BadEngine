@@ -13,7 +13,6 @@ namespace BadEngine
         public InitializeScripts ()
         {
             // There instantiate your scripts
-            // Class must be inherited from MonoBehaviour
             new DemoGame(); // Like this
         }
     }
