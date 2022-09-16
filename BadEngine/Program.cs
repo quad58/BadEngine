@@ -76,15 +76,10 @@ namespace BadEngine
         public static Window Game = new Window(WindowTitle, WindowWidth, WindowHeight, WindowFlag);
         static void Main(string[] args)
         {
-            InitializeScripts();
+            new InitializeScripts();
             Console.WriteLine("Engine Started");
             Start.Invoke();
             Program.RunGame();
-        }
-
-        static void InitializeScripts()
-        {
-            new DemoGame();
         }
 
         public static void RunGame()
