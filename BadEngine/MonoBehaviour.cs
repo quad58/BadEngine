@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using OpenTK;
-using OpenTK.Input;
-using OpenTK.Graphics;
-using OpenTK.Graphics.OpenGL;
-using BadEngine;
-public class MonoBehaviour
+﻿public class MonoBehaviour
 {
     public MonoBehaviour()
     {
