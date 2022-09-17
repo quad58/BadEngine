@@ -67,15 +67,15 @@
   <ItemGroup>
     <Compile Include="Scripts\DemoGame.cs" />
     <Compile Include="InitializeScripts.cs" />
-    <Compile Include="Engine\MonoBehaviour.cs" />
-    <Compile Include="Engine\Program.cs" />
+    <Compile Include="BadEngine\MonoBehaviour.cs" />
+    <Compile Include="BadEngine\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Engine\Shader.cs" />
-    <Compile Include="Engine\ShaderProgram.cs" />
+    <Compile Include="BadEngine\Shader.cs" />
+    <Compile Include="BadEngine\ShaderProgram.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Engine\shaders\default.glsl">
+    <None Include="BadEngine\shaders\default.glsl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="OpenTK.dll.config" />
