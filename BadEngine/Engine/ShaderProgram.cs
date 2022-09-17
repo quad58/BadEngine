@@ -14,7 +14,7 @@ namespace BadEngine
         public bool enebled;
         public bool exists;
         public bool linked;
-        public static string DefaultVertexShaderPath = @"data/shaders/glsl/Default.glsl";
+        public static string DefaultVertexShaderPath = @"Engine/shaders/default.glsl";
 
         public static Dictionary<string, int> UniformLocations = new Dictionary<string, int>();
 
@@ -72,23 +72,30 @@ namespace BadEngine
 
         public void UseDefaultProgram()
         {
-            CreateProgram();
-            Shader DefaultVertexShader = new Shader();
-            DefaultVertexShader.CreateFromFile(ShaderType.VertexShader, DefaultVertexShaderPath);
-            DefaultVertexShader.Compile();
-            DefaultVertexShader.Attach(this);
-            Link();
-            DefaultVertexShader.Detach(this);
-            DefaultVertexShader.Destroy();
-            Eneble();
+            if (File.Exists(DefaultVertexShaderPath))
+            {
+                CreateProgram();
+                Shader DefaultVertexShader = new Shader();
+                DefaultVertexShader.CreateFromFile(ShaderType.VertexShader, DefaultVertexShaderPath);
+                DefaultVertexShader.Compile();
+                DefaultVertexShader.Attach(this);
+                Link();
+                DefaultVertexShader.Detach(this);
+                DefaultVertexShader.Destroy();
+                Eneble();
 
-            Matrix4 model = Matrix4.CreateRotationX(MathHelper.DegreesToRadians(-55.0f));
-            Matrix4 view = Matrix4.CreateTranslation(0.0f, 0.0f, -3.0f);
-            Matrix4 projection = Matrix4.CreatePerspectiveFieldOfView(MathHelper.DegreesToRadians(45.0f), Program.WindowWidth / Program.WindowHeight, 0.1f, 100.0f);
+                Matrix4 model = Matrix4.CreateRotationX(MathHelper.DegreesToRadians(-55.0f));
+                Matrix4 view = Matrix4.CreateTranslation(0.0f, 0.0f, -3.0f);
+                Matrix4 projection = Matrix4.CreatePerspectiveFieldOfView(MathHelper.DegreesToRadians(45.0f), Program.WindowWidth / Program.WindowHeight, 0.1f, 100.0f);
 
-            SetMatrix4("model", model);
-            SetMatrix4("view", view);
-            SetMatrix4("projection", projection);
+                SetMatrix4("model", model);
+                SetMatrix4("view", view);
+                SetMatrix4("projection", projection);
+            }
+            else
+            {
+                Console.WriteLine("Can not find file Default.glsl in path " + DefaultVertexShaderPath);
+            }
         }
 
         public void SetMatrix4(string name, Matrix4 data)
