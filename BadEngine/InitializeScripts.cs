@@ -5,7 +5,7 @@ namespace BadEngine
         public InitializeScripts ()
         {
             // There instantiate your scripts
-            new DemoGame(); // Like this
+            new DemoGame(); // Like this script from path Scripts/DemoGame.cs
         }
     }
 }
