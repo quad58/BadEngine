@@ -1,4 +1,4 @@
 # BadEngine
-Quad's game engine prototype based on OpenGL (OpenTK).
+Quad's game engine prototype based on OpenTK.
 
 Project is stopped.
